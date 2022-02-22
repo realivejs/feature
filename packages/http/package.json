@@ -1,0 +1,14 @@
+{
+  "name": "@realive/http",
+  "version": "1.0.0",
+  "description": "packaging axios",
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^0.25.0"
+  }
+}

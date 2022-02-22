@@ -1,6 +1,4 @@
 {
-  "typescript.validate.enable": false,
-  "javascript.validate.enable": false,
   "eslint.validate": ["javascript", "typescript" ,"json" ],
   "stylelint.validate": [
     "css",
@@ -19,5 +17,16 @@
   "vetur.format.defaultFormatter.js": "none",
   "vetur.validation.template": false, 
   "vetur.format.defaultFormatter.html": "none",
+
+
+  "liveServer.settings.host": "localhost",
+  "liveServer.settings.proxy": {
+      "enable": true,
+      "baseUri": "/wec-counselor-extend-apps",
+      "proxyUri": "http://iwecloud15:31774/"//测试
+  },
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.multiRootWorkspaceName": "feature",
+
   // "vetur.validation.style": false,
 }
