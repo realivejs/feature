@@ -4,7 +4,7 @@ import proxies from "koa-proxies";
 const app = new Koa();
 app.use(
   proxies("/wec-counselor-extend-apps", {
-    target: "http://iwecloud4:31666/",
+    target: "http://iwecloud21:31884/",
     changeOrigin: true,
     logs: true,
   })

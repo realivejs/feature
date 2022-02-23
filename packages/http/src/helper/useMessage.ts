@@ -1,13 +1,23 @@
-import type { ServerOptions } from "../types";
+import type { EnhanceOptions, ServerOptions } from "../types";
 
 function noop() {}
 
-export function useMessage(options: ServerOptions = {}) {
+type MessageHandler = Required<Required<EnhanceOptions>["message"]>;
+
+export function useMessage(options: ServerOptions = {}): MessageHandler {
   const { enhanceOptions } = options;
 
+  if (enhanceOptions?.messageSilence) {
+    return {
+      open: noop,
+      close: noop,
+      error: noop,
+    };
+  }
+
   return {
-    openMessage: enhanceOptions?.message?.open || noop,
-    closeMessage: enhanceOptions?.message?.close || noop,
-    errorMessage: enhanceOptions?.message?.error || noop,
+    open: enhanceOptions?.message?.open || noop,
+    close: enhanceOptions?.message?.close || noop,
+    error: enhanceOptions?.message?.error || noop,
   };
 }

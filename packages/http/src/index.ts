@@ -1,2 +1,2 @@
-export { createServer } from "./createServer";
+export { createAxios } from "./createAxios";
 export { createRequest } from "./createRequest";

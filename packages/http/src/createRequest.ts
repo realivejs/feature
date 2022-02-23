@@ -1,7 +1,7 @@
 import type { ServerOptions } from "./types";
-import { createServer } from "./createServer";
-import { RequestModel } from "./RequestModel";
-import { useInterceptor } from "./interceptor";
+import { createAxios } from "./createAxios";
+import { RequestModel } from "./model";
+import { getDefaultOptions } from "./helper";
 
 /**
  * @description 创建请求
@@ -9,9 +9,16 @@ import { useInterceptor } from "./interceptor";
  * @returns {Request}
  */
 export function createRequest(options: ServerOptions = {}) {
-  const $instance = createServer(options);
+  const $instance = createAxios(options);
+  const _options = getDefaultOptions(options);
 
-  useInterceptor($instance, options);
+  const { enhanceOptions } = _options;
 
-  return new RequestModel($instance);
+  if (enhanceOptions) {
+    const { enhanceAxios } = enhanceOptions;
+    enhanceAxios?.($instance);
+  }
+  console.log("outer useInterceptor", _options);
+
+  return new RequestModel($instance, _options);
 }

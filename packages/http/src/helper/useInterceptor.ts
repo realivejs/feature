@@ -53,30 +53,30 @@ function handleDataError(
 
     switch (true) {
       // 特殊错误捕获
-      case data && data["WEC-HASLOGIN"] === false:
-        progressHandler.errorProgress();
-        messageHandler.errorMessage("登陆信息失效，请重新登陆");
+      case !!data?.["WEC-HASLOGIN"] === false:
+        progressHandler.error();
+        messageHandler.error("登陆信息失效，请重新登陆");
         break;
 
       // 这个不知道是什么报错
       case RESPONSE_CODE.LOGOUT_ERROR === code:
-        progressHandler.errorProgress();
-        messageHandler.errorMessage(`${code} - ${message}`);
+        progressHandler.error();
+        messageHandler.error(`${code} - ${message}`);
         return;
 
       // 业务错误
       case RESPONSE_CODE.BUS_SUCCESS !== code:
-        progressHandler.errorProgress();
-        messageHandler.errorMessage(message);
+        progressHandler.error();
+        messageHandler.error(message);
         return;
 
       default:
-        progressHandler.closeProgress();
-        messageHandler.closeMessage();
+        progressHandler.close();
+        messageHandler.close();
     }
   } else {
-    progressHandler.errorProgress();
-    messageHandler.closeMessage();
+    progressHandler.error();
+    messageHandler.close();
   }
 }
 
@@ -90,11 +90,14 @@ export function useInterceptor(
   instance: AxiosInstance,
   options: ServerOptions = {}
 ) {
+  const { enhanceOptions } = options;
   const messageHandler = useMessage(options);
   const progressHandler = useProgress(options);
 
+  console.log("useInterceptor", options);
+
   bindInterceptor(instance, "request", (request) => {
-    progressHandler.openProgress();
+    progressHandler.open();
     return request;
   });
 
@@ -102,25 +105,27 @@ export function useInterceptor(
     instance,
     "response",
     (response) => {
-      handleDataError(response, messageHandler, progressHandler);
+      if (enhanceOptions?.useBuiltInInterceptor) {
+        handleDataError(response, messageHandler, progressHandler);
+      }
 
       return response;
     },
     (err) => {
-      messageHandler.closeMessage();
+      messageHandler.close();
 
       if (axios.isCancel(err)) {
-        progressHandler.closeProgress();
+        progressHandler.close();
       } else {
-        progressHandler.errorProgress();
+        progressHandler.error();
       }
 
       if (isString(err)) {
-        messageHandler.errorMessage(err);
+        messageHandler.error(err);
       }
 
       if (isError(err)) {
-        messageHandler.errorMessage(err.message);
+        messageHandler.error(err.message);
       }
 
       throw err;

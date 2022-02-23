@@ -1,4 +1,6 @@
 export { getResponseType } from "./getResponseType";
 export { useMessage } from "./useMessage";
 export { useProgress } from "./useProgress";
-export * from "./getType";
+export { getDefaultOptions } from "./getDefaultOptions";
+export { useInterceptor } from "./useInterceptor";
+export * from "./common";

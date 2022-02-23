@@ -1,19 +1,24 @@
 import type { Axios, AxiosRequestConfig, AxiosResponse } from "axios";
 
-export interface ServerOptions extends AxiosRequestConfig {
-  enhanceOptions?: {
-    progress?: {
-      open: () => void;
-      close: () => void;
-      error: () => void;
-    };
-    message?: {
-      open: (message: string) => void;
-      close: () => void;
-      error: (message: string) => void;
-    };
-    enhanceAxios?: (axios: Axios) => void;
+export interface EnhanceOptions {
+  progress?: {
+    open?: () => void;
+    close?: () => void;
+    error?: () => void;
   };
+  message?: {
+    open?: (message: string) => void;
+    close?: () => void;
+    error?: (message: string) => void;
+  };
+  messageSilence?: boolean;
+  progressSlience?: boolean;
+  useBuiltInInterceptor?: boolean;
+  enhanceAxios?: (axios: Axios) => void;
+}
+
+export interface ServerOptions extends AxiosRequestConfig {
+  enhanceOptions?: EnhanceOptions;
 }
 
 export interface ExpectJsonData<T> {
