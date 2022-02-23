@@ -4,6 +4,7 @@
   "description": "packaging axios",
   "license": "ISC",
   "author": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "jest"

@@ -18,7 +18,6 @@ export function createRequest(options: ServerOptions = {}) {
     const { enhanceAxios } = enhanceOptions;
     enhanceAxios?.($instance);
   }
-  console.log("outer useInterceptor", _options);
 
   return new RequestModel($instance, _options);
 }
