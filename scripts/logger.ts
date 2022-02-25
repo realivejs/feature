@@ -8,5 +8,5 @@ export default {
   info: (message: string) =>
     console.log(`${chalk.magenta("·message·:")} ${chalk.yellow(`${message}`)}`),
   complete: (message: string) =>
-    console.log(`${chalk.magenta("complete:")} ${chalk.cyan(`${message}`)}`),
+    console.log(`${chalk.magenta("·complete·:")} ${chalk.cyan(`${message}`)}`),
 };
