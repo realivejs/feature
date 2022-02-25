@@ -1,5 +1,11 @@
 # @realive/http
 
+## 1.0.6
+
+### Patch Changes
+
+- build 1.0.6(修复 post 方法调用错误)
+
 ## 1.0.5
 
 ### Patch Changes
