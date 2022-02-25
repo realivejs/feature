@@ -1,6 +1,6 @@
 {
   "name": "@realive/http",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "packaging axios",
   "keywords": [
     "axios",
@@ -14,9 +14,6 @@
     "directory": "packages/http"
   },
   "author": "wonderfulMan <https://github.com/wonderfulMan>",
-  "files": [
-    "./dist"
-  ],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.yarnpkg.com"
