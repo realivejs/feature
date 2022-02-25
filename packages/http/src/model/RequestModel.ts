@@ -6,8 +6,8 @@ import { isEmptyObject } from "../helper";
 
 export class RequestModel {
   constructor(
-    public instance: AxiosInstance,
-    public rootOptions: ServerOptions
+    private instance: AxiosInstance,
+    private rootOptions: ServerOptions
   ) {}
 
   /**
@@ -23,7 +23,7 @@ export class RequestModel {
    * @param {ServerOptions} options
    * @returns {ServerOptions}
    */
-  mergeOptions(options: ServerOptions = {}) {
+  private mergeOptions(options: ServerOptions = {}) {
     if (isEmptyObject(options)) {
       return this.rootOptions;
     } else {
