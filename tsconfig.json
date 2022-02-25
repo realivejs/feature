@@ -22,4 +22,11 @@
     "packages",
     "scripts"
   ],
+  "ts-node": {
+    "compilerOptions": {
+      "types": [
+        "./scripts/build.d.ts"
+      ]
+    }
+  }
 }

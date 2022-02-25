@@ -1,4 +1,4 @@
-import { isNil } from ".";
+import { isNil } from "./common";
 import type { EnhanceOptions, ServerOptions } from "../types";
 
 /**

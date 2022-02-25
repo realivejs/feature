@@ -1,7 +1,9 @@
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import axios from "axios";
 import { RESPONSE_CODE } from "../constants";
-import { isString, isError, useMessage, useProgress } from "../helper";
+import { isString, isError } from "./common";
+import { useMessage } from "./useMessage";
+import { useProgress } from "./useProgress";
 import type { PossiblyErrorData, ServerOptions } from "../types";
 
 type ResponseIntercept = "response";
