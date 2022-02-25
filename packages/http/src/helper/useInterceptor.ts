@@ -51,11 +51,12 @@ function handleDataError(
   const { data: axiosData } = response;
   // 业务返回response是否存在
   if (axiosData) {
-    const { data, code, message } = axiosData;
+    const data = axiosData.data || {};
+    const { code, message } = axiosData;
 
     switch (true) {
       // 特殊错误捕获
-      case !!data?.["WEC-HASLOGIN"] === false:
+      case "WEC-HASLOGIN" in data && data["WEC-HASLOGIN"] === false:
         progressHandler.error();
         messageHandler.error("登陆信息失效，请重新登陆");
         break;
