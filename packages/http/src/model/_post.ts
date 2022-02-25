@@ -9,6 +9,7 @@ export function _post<Res, Req>(
 ) {
   return _request<Res, Req>($instance, url, {
     ...options,
+    method: "post",
     data: options.data,
   });
 }

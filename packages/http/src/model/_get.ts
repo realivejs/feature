@@ -8,6 +8,7 @@ export function _get<Res, Req>(
   options: ServerOptions = {}
 ) {
   return _request<Res, Req>($instance, url, {
+    ...options,
     method: "get",
     params: options.params,
   });
