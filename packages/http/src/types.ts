@@ -15,6 +15,8 @@ export interface EnhanceOptions {
   progressSlience?: boolean;
   useBuiltInInterceptor?: boolean;
   enhanceAxios?: (axios: Axios) => void;
+  handleServerResponse?: <T>() => T;
+  dataKey?: string;
 }
 
 export interface ServerOptions extends AxiosRequestConfig {
@@ -24,7 +26,9 @@ export interface ServerOptions extends AxiosRequestConfig {
 export interface ExpectJsonData<T> {
   code: string | number;
   message: string;
-  data: T;
+  data?: T;
+  datas?: T;
+  [key: string]: unknown;
 }
 
 export interface PossiblyErrorData

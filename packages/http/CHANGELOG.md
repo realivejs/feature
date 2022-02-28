@@ -1,5 +1,11 @@
 # @realive/http
 
+## 1.0.8
+
+### Patch Changes
+
+- 修复 response data 为 undefined
+
 ## 1.0.7
 
 ### Patch Changes

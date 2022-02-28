@@ -1,7 +1,13 @@
-import type { EnhanceReponse, WrapAxiosResponse } from "../types";
+import type {
+  EnhanceReponse,
+  WrapAxiosResponse,
+  ServerOptions,
+  ExpectJsonData,
+} from "../types";
 import { RESPONSE_CODE, RESPONSE_TYPE } from "../constants";
 import { getResponseType } from "./getResponseType";
 import { checkStatusSuccess } from "./checkHttpStatus";
+import { isUndefined } from ".";
 
 /**
  * @description 创建通用response
@@ -21,6 +27,33 @@ export function createResponse(response: EnhanceReponse): EnhanceReponse {
 }
 
 /**
+ * @description 获取服务端返回数据
+ * @param params
+ */
+export function getServerData(
+  serverData = {} as ExpectJsonData<unknown>,
+  options: ServerOptions
+): ExpectJsonData<unknown>["data"] {
+  const { data, datas } = serverData;
+  const { enhanceOptions = {} } = options;
+  const { dataKey } = enhanceOptions;
+
+  if (data) {
+    return data;
+  }
+
+  if (datas) {
+    return datas;
+  }
+
+  if (!isUndefined(dataKey)) {
+    return serverData[dataKey] as ExpectJsonData<unknown>["data"];
+  }
+
+  return {};
+}
+
+/**
  * @description 根据传入axiosRepsonse对象获取响应
  * @param {WrapAxiosResponse} response
  * @param {boolean} isCancel
@@ -28,6 +61,7 @@ export function createResponse(response: EnhanceReponse): EnhanceReponse {
  */
 export function getResponse(
   response = {} as WrapAxiosResponse,
+  options: ServerOptions,
   isCancel?: boolean
 ): EnhanceReponse {
   if (!response || !response.data) {
@@ -41,7 +75,8 @@ export function getResponse(
     });
   } else {
     // 获取响应类型
-    const { data, code, message } = response.data;
+    const { code, message } = response.data;
+    const data = getServerData(response.data, options);
     // 获取http状态码
     const { status } = response;
     const types = getResponseType(data);
