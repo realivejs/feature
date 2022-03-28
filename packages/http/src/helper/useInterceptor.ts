@@ -51,7 +51,8 @@ function handleDataError(
   const { data: axiosData } = response;
   // 业务返回response是否存在
   if (axiosData) {
-    const data = axiosData.data || {};
+    const data =
+      axiosData.data || ({} as AxiosResponse<PossiblyErrorData>["data"]);
     const { code, message } = axiosData;
 
     switch (true) {
@@ -65,13 +66,13 @@ function handleDataError(
       case RESPONSE_CODE.LOGOUT_ERROR === code:
         progressHandler.error();
         messageHandler.error(`${code} - ${message}`);
-        return;
+        break;
 
       // 业务错误
       case RESPONSE_CODE.BUS_SUCCESS !== code:
         progressHandler.error();
         messageHandler.error(message);
-        return;
+        break;
 
       default:
         progressHandler.close();

@@ -10,6 +10,7 @@
     "strictFunctionTypes": true,
     "declaration": true,
     "declarationDir": "./types",
+    "allowSyntheticDefaultImports":true,
     "resolveJsonModule": true,
     "rootDir": ".",
     "baseUrl": ".",
