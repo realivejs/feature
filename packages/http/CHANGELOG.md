@@ -1,4 +1,22 @@
-# @realive/http
+## 1.2.1
+
+### Patch Changes
+
+- 修复拦截器重复添加问题
+
+## 1.2.0
+
+### Minor Changes
+
+- 修复拦截器重复添加
+
+### Minor Changes
+
+- 修复内部类型错误
+
+### Major Changes
+
+- 修复内部类型错误
 
 ## 1.0.8
 

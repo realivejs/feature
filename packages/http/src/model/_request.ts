@@ -4,14 +4,18 @@ import { getResponse } from "../helper/createResponse";
 import axios from "axios";
 import { useInterceptor } from "../helper";
 
+let isAddInterceptor = false;
+
 export async function _request<Res, Req>(
   instance: AxiosInstance,
   url: string,
   options: ServerOptions = {}
 ) {
-  return new Promise<EnhanceReponse<Res, Req>>((resolve) => {
-    useInterceptor(instance, options);
+  if (!isAddInterceptor) {
+    isAddInterceptor = useInterceptor(instance, options);
+  }
 
+  return new Promise<EnhanceReponse<Res, Req>>((resolve) => {
     instance
       .request({
         url,

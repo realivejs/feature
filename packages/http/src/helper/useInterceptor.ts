@@ -93,7 +93,7 @@ function handleDataError(
 export function useInterceptor(
   instance: AxiosInstance,
   options: ServerOptions = {}
-) {
+): boolean {
   const { enhanceOptions } = options;
   const messageHandler = useMessage(options);
   const progressHandler = useProgress(options);
@@ -135,4 +135,6 @@ export function useInterceptor(
       throw err;
     }
   );
+
+  return true;
 }
